@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def student_contact(request):
-    return HttpResponse('<h1>Check in student</h1>')
+    return render(request, 'checkin/student_contact.html')
 
 
 def about(request):
@@ -12,4 +12,4 @@ def about(request):
 
 
 def home(request):
-    return HttpResponse('<h1>Home login page</h1>')
+    return render(request, 'checkin/home.html')
