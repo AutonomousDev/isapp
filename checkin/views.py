@@ -8,7 +8,7 @@ def student_contact(request):
 
 
 def about(request):
-    return HttpResponse('<h1>About check in</h1>')
+    return render(request, 'checkin/about.html', {'title': 'About'})
 
 
 def home(request):
