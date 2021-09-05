@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student contact</title>
-</head>
-<body>
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<h1>Student check in</h1>
 <form>
     <label for="student-name">Student Name</label><br>
     <input name="student-name" id="student-name" list="students" required autocomplete="off">
 
     <p>Attended Check-in?</p>
-    <input type="radio" id="yes" name="attended_check-in", value="yes" required>
+    <input type="radio" id="yes" name="attended_check-in" , value="yes" required>
     <label for="yes">Yes</label><br>
-    <input type="radio" id="no" name="attended_check-in", value="no" required>
+    <input type="radio" id="no" name="attended_check-in" , value="no" required>
     <label for="no">No</label><br>
+    <input type="submit">
 
-
-<datalist id="students">
-    <option>John Doe</option>
-    <option>Jane Doe</option>
-    <option>Mark Senior</option>
-    <option>Mike Student</option>
-    <option>Orange Student</option>
-    <option>Purple Student</option>
-</datalist>
+    <datalist id="students">
+        <option>John Doe</option>
+        <option>Jane Doe</option>
+        <option>Mark Senior</option>
+        <option>Mike Student</option>
+        <option>Orange Student</option>
+        <option>Purple Student</option>
+    </datalist>
 </form>
-
-
-</body>
-</html>
+{% endblock content %}

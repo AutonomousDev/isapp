@@ -12,4 +12,4 @@ def about(request):
 
 
 def home(request):
-    return render(request, 'checkin/home.html')
+    return render(request, 'checkin/home.html', {'title': 'Home'})
