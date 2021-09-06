@@ -1,13 +1,14 @@
 from django.db import models
-import datetime
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Course(models.Model):
     """Model representing courses"""
     course_name = models.CharField(max_length=200, help_text="Enter the name of the course.")
-    course_id = models.CharField(max_length=200, help_text="Enter the course id code if applicable.")
-    course_provider = models.ForeignKey('CourseProvider', on_delete=models.SET_NULL, null=True)
+    course_id = models.CharField(max_length=200, help_text="Enter the course id code if applicable.", blank=True, default='')
+    course_provider = models.ForeignKey('CourseProvider', on_delete=models.SET_NULL, null=True,  blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
@@ -17,8 +18,8 @@ class Course(models.Model):
 class CourseProvider(models.Model):
     """Model representing course providers"""
     provider_name = models.CharField(max_length=200, help_text="Enter the course provider name.")
-    provider_website = models.CharField(max_length=255, help_text="Enter the course providers website.")
-    lms = models.CharField(max_length=610, help_text="Enter the learning management systems web address")
+    provider_website = models.CharField(max_length=255, help_text="Enter the course providers website.", blank=True, default='')
+    lms = models.CharField(max_length=610, help_text="Enter the learning management systems web address", blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
@@ -29,7 +30,7 @@ class Student(models.Model):
     """Model representing a student"""
     first_name = models.CharField(max_length=50, help_text="Student first name.")
     last_name = models.CharField(max_length=50, help_text="Student last name.")
-    course = models.ManyToManyField(Course, help_text="Select courses student is enrolled in.")
+    course = models.ManyToManyField(Course, help_text="Select courses student is enrolled in.", null=True, blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
@@ -42,18 +43,14 @@ class Student(models.Model):
 
 class StudentMeeting(models.Model):
     """Model representing a check-in appointment"""
-    appointment_date = models.DateField("Date", default=datetime.date.today)
+    instructor = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, default='')
+    student = models.ForeignKey(Student, help_text="Student Name.", on_delete=models.CASCADE, null=True)
+    appointment_date = models.DateField("Date", default=timezone.now)
     attended_meeting = models.BooleanField()
+    narrative = models.TextField(blank=True, default='')
 
-
-#Multiple choice isn't working todo
-    # MISSING_WORK_CHOICES = (
-    #     (0, "Caught up on work")
-    #     (1, "1 missing assignment")
-    #     (2, "2 missing assignment")
-    #     (3, "3+ missing assignment")
-    # )
-
-
+    def __str__(self):
+        """String representing the Model object"""
+        return str(self.appointment_date) + ": " + self.student.last_name + ", " + self.student.first_name
 
 

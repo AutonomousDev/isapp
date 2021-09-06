@@ -1,0 +1,11 @@
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<h1>Data Summary</h1>
+<ul>
+    {% for meeting in meetings %}
+    <li>{{ meeting.appointment_date }}, {{ meeting.attended_meeting }}, {{ meeting.narrative }} </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
