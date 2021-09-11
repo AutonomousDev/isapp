@@ -1,25 +1,33 @@
 {% extends "checkin/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Student check in</h1>
+
+<div class="content-section">
 <form>
-    <label for="student-name">Student Name</label><br>
-    <input name="student-name" id="student-name" list="students" required autocomplete="off">
 
-    <p>Attended Check-in?</p>
-    <input type="radio" id="yes" name="attended_check-in" , value="yes" required>
-    <label for="yes">Yes</label><br>
-    <input type="radio" id="no" name="attended_check-in" , value="no" required>
-    <label for="no">No</label><br>
-    <input type="submit">
+    <fieldset class="form-group">
+        {{ form|crispy }}
+        <legend class="border-bottom mb-4">Student check in</legend>
+        <label for="student-name">Student Name</label><br>
+        <input name="student-name" id="student-name" list="students" required autocomplete="off">
 
-    <datalist id="students">
-        <option>John Doe</option>
-        <option>Jane Doe</option>
-        <option>Mark Senior</option>
-        <option>Mike Student</option>
-        <option>Orange Student</option>
-        <option>Purple Student</option>
-    </datalist>
+        <p>Attended Check-in?</p>
+        <input type="radio" id="yes" name="attended_check-in" , value="yes" required>
+        <label for="yes">Yes</label><br>
+        <input type="radio" id="no" name="attended_check-in" , value="no" required>
+        <label for="no">No</label><br>
+        <button class="btn btn-outline-info" type="submit">Submit</button>
+
+        <datalist id="students">
+            <option>John Doe</option>
+            <option>Jane Doe</option>
+            <option>Mark Senior</option>
+            <option>Mike Student</option>
+            <option>Orange Student</option>
+            <option>Purple Student</option>
+        </datalist>
+    </fieldset>
 </form>
+</div>
 {% endblock content %}
