@@ -1,0 +1,19 @@
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<h1>{{ student.last_name }}, {{ student.first_name }}</h1>
+
+<p><strong>Courses:</strong> {{ student.course.all|join:", " }}</p>
+
+
+<div style="margin-left:20px;margin-top:20px">
+    <h4>Meetings</h4>
+    <ul>
+    {% for meeting in student.studentmeeting_set.all %}
+    <li>{{ meeting.appointment_date }}, {{ meeting.attended_meeting }}, {{ meeting.narrative }} </li>
+
+    {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

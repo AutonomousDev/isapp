@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 
 # Create your models here.
@@ -10,9 +12,12 @@ class Course(models.Model):
     course_id = models.CharField(max_length=200, help_text="Enter the course id code if applicable.", blank=True, default='')
     course_provider = models.ForeignKey('CourseProvider', on_delete=models.SET_NULL, null=True,  blank=True, default='')
 
+    class Meta:
+        ordering = ['course_name']
+
     def __str__(self):
         """String representing the Model object"""
-        return self.course_name
+        return f'{self.course_name}'
 
 
 class CourseProvider(models.Model):
@@ -38,11 +43,12 @@ class Student(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a detailed record for this student"""
-        return reversed("student-detail", args=[str(self.id)])
+        return reverse("checkin-student-detail", args=[str(self.id)])
 
 
 class StudentMeeting(models.Model):
     """Model representing a check-in appointment"""
+
     instructor = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, default='')
     student = models.ForeignKey(Student, help_text="Student Name.", on_delete=models.CASCADE, null=True)
     appointment_date = models.DateField("Date", default=timezone.now)
@@ -52,5 +58,6 @@ class StudentMeeting(models.Model):
     def __str__(self):
         """String representing the Model object"""
         return str(self.appointment_date) + ": " + self.student.last_name + ", " + self.student.first_name
+
 
 

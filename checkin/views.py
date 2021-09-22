@@ -26,3 +26,6 @@ class Data(generic.ListView):
 #     }
 #     return render(request, 'checkin/data_summary.html', context)
 
+
+class StudentDetailView(generic.DetailView):
+    model = Student

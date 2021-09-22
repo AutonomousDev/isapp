@@ -7,7 +7,7 @@
         {% for student in student_list %}
         <li>
 
-            <a href="#"></a> {{student.last_name}}, {{student.first_name}}
+            <a href="{{ student.get_absolute_url }}"> {{student.last_name}}, {{student.first_name}}</a>
         </li>
         {% endfor %}
     </ul>
