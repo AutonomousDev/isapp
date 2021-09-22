@@ -1,0 +1,17 @@
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<h1>Student list</h1>
+    {% if student_list %}
+    <ul>
+        {% for student in student_list %}
+        <li>
+
+            <a href="#"></a> {{student.last_name}}, {{student.first_name}}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p> There are no students.</p>
+    {% endif %}
+{% endblock content %}

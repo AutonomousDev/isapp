@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import StudentMeeting
+from .models import StudentMeeting, Student
+from django.views import generic
 
 
 # Create your views here.
@@ -15,9 +16,13 @@ def about(request):
 def home(request):
     return render(request, 'checkin/home.html', {'title': 'Home'})
 
-def data(request):
-    context = {
-        'meetings': StudentMeeting.objects.all()
-    }
-    return render(request, 'checkin/data_summary.html', context)
+
+class Data(generic.ListView):
+    model = Student
+
+# def data(request):
+#     context = {
+#         'meetings': StudentMeeting.objects.all()
+#     }
+#     return render(request, 'checkin/data_summary.html', context)
 
