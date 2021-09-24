@@ -6,8 +6,8 @@ from . import models
 
 class StudentWidget(s2forms.ModelSelect2Widget):
     search_fields = [
-        "username__icontains",
-        "email__icontains",
+        "first_name__icontains",
+        "last_name__icontains",
     ]
 
 
