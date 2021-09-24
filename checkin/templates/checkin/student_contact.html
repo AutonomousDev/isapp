@@ -5,12 +5,26 @@
 
 <div class="content-section">
 <form>
-
     <fieldset class="form-group">
         {{ form|crispy }}
         <legend class="border-bottom mb-4">Student check in</legend>
+
         <label for="student-name">Student Name</label><br>
-        <input name="student-name" id="student-name" list="students" required autocomplete="off">
+
+        <div id="dropdown-parent" >
+            <select name="student-name" class="js-example-basic-single" id="student-name" >
+                {% for student in students %}
+                <option>{{ student }}</option>
+                {% endfor %}
+        </select>
+        </div>
+
+        <script>
+            // In your Javascript (external .js resource or <script> tag)
+            $('#student-name').select2({
+            dropdownParent: $('#dropdown-parent')
+            });
+        </script>
 
         <p>Attended Check-in?</p>
         <input type="radio" id="yes" name="attended_check-in" , value="yes" required>
@@ -18,16 +32,9 @@
         <input type="radio" id="no" name="attended_check-in" , value="no" required>
         <label for="no">No</label><br>
         <button class="btn btn-outline-info" type="submit">Submit</button>
-
-        <datalist id="students">
-            <option>John Doe</option>
-            <option>Jane Doe</option>
-            <option>Mark Senior</option>
-            <option>Mike Student</option>
-            <option>Orange Student</option>
-            <option>Purple Student</option>
-        </datalist>
     </fieldset>
+
+
 </form>
 </div>
 {% endblock content %}

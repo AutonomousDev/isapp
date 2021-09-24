@@ -53,6 +53,7 @@ class StudentMeeting(models.Model):
     student = models.ForeignKey(Student, help_text="Student Name.", on_delete=models.CASCADE, null=True)
     appointment_date = models.DateField("Date", default=timezone.now)
     attended_meeting = models.BooleanField()
+    missing_work_amount = models.IntegerField(default=0)
     narrative = models.TextField(blank=True, default='')
 
     def __str__(self):

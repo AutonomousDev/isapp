@@ -6,7 +6,10 @@ from django.views import generic
 
 # Create your views here.
 def student_contact(request):
-    return render(request, 'checkin/student_contact.html')
+    context = {
+        'students': Student.objects.all()
+    }
+    return render(request, 'checkin/student_contact.html', context)
 
 
 def about(request):

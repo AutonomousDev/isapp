@@ -13,6 +13,7 @@
             <tr>
                 <th>Date</th>
                 <th>Attendance</th>
+                <th># of Missing Assignments</th>
                 <th>Narrative</th>
             </tr>
         </thead>
@@ -21,9 +22,10 @@
             <tr>
                 <td>{{ meeting.appointment_date }}</td>
                 <td>{{ meeting.attended_meeting }}</td>
+                <td>{{ meeting.missing_work_amount }}</td>
                 <td>{{ meeting.narrative }}</td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
 
     </table>
