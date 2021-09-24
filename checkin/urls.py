@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.home, name='checkin-home'),
     path('data/', views.Data.as_view(), name='checkin-data'),
     path('student/<int:pk>', views.StudentDetailView.as_view(), name='checkin-student-detail'),
+    path('student_meeting/', views.StudentMeetingView.as_view(), name='checkin-student-meeting'),
 
 ]

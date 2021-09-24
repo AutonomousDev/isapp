@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import StudentMeeting, Student
 from django.views import generic
+from . import forms, models
 
 
 # Create your views here.
@@ -32,3 +33,10 @@ class Data(generic.ListView):
 
 class StudentDetailView(generic.DetailView):
     model = Student
+
+
+class StudentMeetingView(generic.CreateView):
+    model = models.StudentMeeting
+    form_class = forms.StudentMeetingForm
+    success_url = "/"
+
