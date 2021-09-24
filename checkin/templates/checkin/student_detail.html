@@ -8,12 +8,25 @@
 
 <div style="margin-left:20px;margin-top:20px">
     <h4>Meetings</h4>
-    <ul>
-    {% for meeting in student.studentmeeting_set.all %}
-    <li>{{ meeting.appointment_date }}, {{ meeting.attended_meeting }}, {{ meeting.narrative }} </li>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Attendance</th>
+                <th>Narrative</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for meeting in student.studentmeeting_set.all %}
+            <tr>
+                <td>{{ meeting.appointment_date }}</td>
+                <td>{{ meeting.attended_meeting }}</td>
+                <td>{{ meeting.narrative }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
 
-    {% endfor %}
-    </ul>
+    </table>
   </div>
 
 {% endblock content %}

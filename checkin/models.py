@@ -35,7 +35,7 @@ class Student(models.Model):
     """Model representing a student"""
     first_name = models.CharField(max_length=50, help_text="Student first name.")
     last_name = models.CharField(max_length=50, help_text="Student last name.")
-    course = models.ManyToManyField(Course, help_text="Select courses student is enrolled in.", null=True, blank=True, default='')
+    course = models.ManyToManyField(Course, help_text="Select courses student is enrolled in.", blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
