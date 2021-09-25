@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import StudentMeeting, Student
 from django.views import generic
 from . import forms, models
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
@@ -35,8 +36,19 @@ class StudentDetailView(generic.DetailView):
     model = Student
 
 
-class StudentMeetingView(generic.CreateView):
+class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
     model = models.StudentMeeting
     form_class = forms.StudentMeetingForm
-    success_url = "/"
+    template_name = 'checkin/student_meeting_form.html'
+    success_message = f'Meeting recorded'
+    success_url = 'checkin-student-meeting'
+
+    def form_valid(self, form):
+        student_meeting = form.save(commit=False)
+        student_meeting.instructor = self.request.user
+        student_meeting.save()
+
+        return redirect('checkin-student-meeting')
+
+
 
