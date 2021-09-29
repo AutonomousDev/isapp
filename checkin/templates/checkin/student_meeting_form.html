@@ -7,11 +7,12 @@
     </style>
 </head>
 
+
     <h1>Document Student Meeting</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit">
+        <input type="submit" value="Submit">
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {{ form.media.js }}
