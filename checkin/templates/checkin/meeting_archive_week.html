@@ -1,0 +1,19 @@
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<h1>Week {{ week|date:'W' }}</h1>
+<ul>
+    {% for meeting in object_list %}
+    <li>{{ meeting.appointment_date|date:"F j, Y"}}: {{meeting.student}}</li>
+    {% endfor %}
+</ul>
+<p>
+    {% if previous_week %}
+        Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
+    {% endif %}
+    {% if previous_week and next_week %}--{% endif %}
+    {% if next_week %}
+        Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }}
+    {% endif %}
+</p>
+{% endblock content %}

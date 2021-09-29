@@ -11,7 +11,6 @@ class StudentWidget(s2forms.ModelSelect2Widget):
     ]
 
 
-
 class StudentMeetingForm(forms.ModelForm):
     class Meta:
         model = models.StudentMeeting
@@ -20,3 +19,4 @@ class StudentMeetingForm(forms.ModelForm):
         widgets = {
             "student": StudentWidget,
         }
+

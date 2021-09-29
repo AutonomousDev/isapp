@@ -4,6 +4,7 @@ from .models import StudentMeeting, Student
 from django.views import generic
 from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.dates import WeekArchiveView
 
 
 # Create your views here.
@@ -23,6 +24,16 @@ class Data(generic.ListView):
 class StudentDetailView(generic.DetailView):
     """List of student meetings for selected student"""
     model = Student
+
+
+class MeetingWeekArchiveView(WeekArchiveView):
+    """This view is used to view all meetings in a week"""
+    queryset = StudentMeeting.objects.all()
+    date_field = "appointment_date"
+    week_format = "%W"
+    allow_future = True
+    allow_empty = True
+    template_name = 'checkin/meeting_archive_week.html'
 
 
 class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
