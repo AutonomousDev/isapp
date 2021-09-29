@@ -7,14 +7,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-def student_contact(request):
-    """Depreciated use StudentMeetingView. TODO Phase out"""
-    context = {
-        'students': Student.objects.all()
-    }
-    return render(request, 'checkin/student_contact.html', context)
-
-
 def about(request):
     return render(request, 'checkin/about.html', {'title': 'About'})
 
