@@ -16,10 +16,12 @@ def home(request):
 
 
 class Data(generic.ListView):
+    """List of students with links to each student"""
     model = Student
 
 
 class StudentDetailView(generic.DetailView):
+    """List of student meetings for selected student"""
     model = Student
 
 
