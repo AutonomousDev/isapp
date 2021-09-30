@@ -35,6 +35,11 @@ class MeetingWeekArchiveView(WeekArchiveView):
     allow_empty = True
     template_name = 'checkin/meeting_archive_week.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(MeetingWeekArchiveView, self).get_context_data(**kwargs)
+        context['student'] = Student.objects.all()
+        return context
+
 
 class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
     model = models.StudentMeeting

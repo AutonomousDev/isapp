@@ -1,19 +1,71 @@
 {% extends "checkin/base.html" %}
 
 {% block content %}
-<h1>Week {{ week|date:'W' }}</h1>
-<ul>
-    {% for meeting in object_list %}
-    <li>{{ meeting.appointment_date|date:"F j, Y"}}: {{meeting.student}}</li>
-    {% endfor %}
-</ul>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Student</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for this_student in student.all %}
+        <tr>
+            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Attendance</th>
+                        <th># of Missing Assignments</th>
+                        <th>Narrative</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for meeting in object_list %}
+                    {% if meeting.student == this_student %}
+                    <tr>
+                        <td>{{ meeting.appointment_date }}</td>
+
+                        {% if meeting.attended_meeting %}
+                        <td>{{ meeting.attended_meeting }}</td>
+                        {% else %}
+                        <td style="background-color: DarkOrange;">{{ meeting.attended_meeting }}</td>
+                        {% endif %}
+
+                        {% if meeting.missing_work_amount != 0 %}
+                        <td style="background-color: IndianRed;" >{{ meeting.missing_work_amount }}</td>
+                        {% else %}
+                        <td>{{ meeting.missing_work_amount }}</td>
+                        {% endif %}
+
+                        <td>{{ meeting.narrative }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
 <p>
     {% if previous_week %}
-        Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
+    Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
     {% endif %}
     {% if previous_week and next_week %}--{% endif %}
     {% if next_week %}
         Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }}
     {% endif %}
 </p>
+
 {% endblock content %}
