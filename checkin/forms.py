@@ -14,7 +14,7 @@ class StudentWidget(s2forms.ModelSelect2Widget):
 class StudentMeetingForm(forms.ModelForm):
     class Meta:
         model = models.StudentMeeting
-        exclude = ["instructor"]
+        exclude = ["instructor", "current_courses"]
         fields = "__all__"
         widgets = {
             "student": StudentWidget,

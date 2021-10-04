@@ -2,10 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
-
-# Create your models here.
 class Course(models.Model):
     """Model representing courses"""
     course_name = models.CharField(max_length=200, help_text="Enter the name of the course.")
@@ -55,10 +55,20 @@ class StudentMeeting(models.Model):
     attended_meeting = models.BooleanField()
     missing_work_amount = models.IntegerField(default=0)
     narrative = models.TextField(blank=True, default='')
+    current_courses = models.ManyToManyField(Course, blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
         return str(self.appointment_date) + ": " + self.student.last_name + ", " + self.student.first_name
+
+
+@receiver(post_save, sender=StudentMeeting)
+def set_current_courses(sender, instance, created, **kwargs):
+    if created:
+        instance.current_courses.set(instance.student.course.all())
+
+
+
 
 
 

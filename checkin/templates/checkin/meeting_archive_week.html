@@ -5,8 +5,7 @@
     <ul class="pagination pagination-lg justify-content-center">
         {% if previous_week %}
         <li class="page-item ">
-            <a class="page-link" href="{% url 'checkin-meeting-archive-week' previous_week|date:"Y"
-            previous_week|date:"W" %}" tabindex="-1">
+            <a class="page-link" href="{% url 'checkin-meeting-archive-week' previous_week|date:"Y" previous_week|date:"W" %}" tabindex="-1">
             Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
             </a>
         </li>
@@ -30,7 +29,13 @@
         <tbody>
         {% for this_student in student.all %}
         <tr>
-            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
+            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4>
+                {% for course in this_student.course.all %}
+                {{ course }}
+                {% endfor %}
+                <!-- TODO Optimize this logic to reduce the number of for loops accross the page-->
+                <!-- TODO get the course off the meeting not the student. -->
+            </td>
         </tr>
         <tr>
             <td>
@@ -44,6 +49,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!-- TODO I think I can accomplish this with just one loop -->
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
                     <tr>
