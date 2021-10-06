@@ -1,6 +1,8 @@
 {% extends "checkin/base.html" %}
 
 {% block content %}
+
+<h2>Week of {{ week }}</h2>
 <nav aria-label="Page navigation">
     <ul class="pagination pagination-lg justify-content-center">
         {% if previous_week %}
@@ -19,6 +21,7 @@
         {% endif %}
     </ul>
 </nav>
+
 <div>
     <table>
         <thead>
@@ -28,13 +31,18 @@
         </thead>
         <tbody>
         {% for this_student in student.all %}
+        {% if this_student.active %}
         <tr>
             <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4>
-                {% for course in this_student.course.all %}
-                {{ course }}
-                {% endfor %}
-                <!-- TODO Optimize this logic to reduce the number of for loops accross the page-->
-                <!-- TODO get the course off the meeting not the student. -->
+                <ul>
+                    {% for enrollment in this_student.courseenrollment_set.all %}
+                    {% if enrollment.start_date|date:"Y-m-d" < week|date:"Y-m-d"%}
+                    {% if week|date:"Y-m-d" < enrollment.end_date|date:"Y-m-d" %}
+                    <li>{{ enrollment.course }}</li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    </ul>
             </td>
         </tr>
         <tr>
@@ -49,7 +57,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- TODO I think I can accomplish this with just one loop -->
+
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
                     <tr>
@@ -75,6 +83,7 @@
                 </table>
             </td>
         </tr>
+        {% endif %}
         {% endfor %}
         </tbody>
     </table>
