@@ -154,3 +154,7 @@ CACHES = {
 
 # Tell select2 which cache configuration to use:
 SELECT2_CACHE_BACKEND = "select2"
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
