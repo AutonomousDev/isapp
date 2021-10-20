@@ -5,10 +5,12 @@ from django.views import generic
 from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.dates import WeekArchiveView
+import buzz_request
 
 
 # Create your views here.
 def about(request):
+
     return render(request, 'checkin/about.html', {'title': 'About'})
 
 
