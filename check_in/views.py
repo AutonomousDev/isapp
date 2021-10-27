@@ -19,7 +19,7 @@ def ae_login(request):
         return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
 
 def ae_login_form(request):
-    return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
+    return render(request, 'check_in/AE_Login_form.html', {'title': 'AE_Login'})
 
 def about(request):
     return render(request, 'check_in/about.html', {'title': 'About'})
