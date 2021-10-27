@@ -9,7 +9,7 @@ from check_in.buzz_request import BuzzRequest
 
 
 # Create your views here.
-def ae_login(request):
+def ae_login(request):  #not used??
     user = None
     if request.user.is_authenticated:
         user = request.user
