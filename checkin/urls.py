@@ -8,6 +8,7 @@ import datetime
 urlpatterns = [
     path('about/', views.about, name='checkin-about'),
     path('', views.home, name='checkin-home'),
+    path('AE_login/', views.about, name='checkin-ae_login'),
     path('data/', login_required(views.Data.as_view()), name='checkin-data'),
     path('student/<int:pk>', login_required(views.StudentDetailView.as_view()), name='checkin-student-detail'),
     path('student_meeting/', login_required(views.StudentMeetingView.as_view()), name='checkin-student-meeting'),

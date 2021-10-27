@@ -1,0 +1,25 @@
+{% extends "checkin/base.html" %}
+
+{% block content %}
+<div style="margin-left:20px;margin-top:20px">
+    {% if student_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><h1>Student list</h1></th>
+            </tr>
+        </thead>
+         <tbody>
+         {% for student in student_list %}
+         <tr>
+             <td><a href="{{ student.get_absolute_url }}"> {{student.last_name}}, {{student.first_name}}</a></td>
+         </tr>
+        {% endfor %}
+         </tbody>
+    </table>
+
+    {% else %}
+        <p> There are no students.</p>
+    {% endif %}
+</div>
+{% endblock content %}

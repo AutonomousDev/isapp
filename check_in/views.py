@@ -5,7 +5,7 @@ from django.views import generic
 from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.dates import WeekArchiveView
-from checkin.buzz_request import BuzzRequest
+from check_in.buzz_request import BuzzRequest
 
 
 # Create your views here.
@@ -16,14 +16,14 @@ def ae_login(request):
     if request.POST.get(username) != None and request.POST.get(password) != None:
         buzz = BuzzRequest(user)
         buzz.login(request.username, request.password)
-        return render(request, 'checkin/about.html', {'title': 'About'})
+        return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
 
 def about(request):
-    return render(request, 'checkin/about.html', {'title': 'About'})
+    return render(request, 'check_in/about.html', {'title': 'About'})
 
 
 def home(request):
-    return render(request, 'checkin/home.html', {'title': 'Home'})
+    return render(request, 'check_in/home.html', {'title': 'Home'})
 
 
 class Data(generic.ListView):
@@ -43,7 +43,7 @@ class MeetingWeekArchiveView(WeekArchiveView):
     week_format = "%W"
     allow_future = True
     allow_empty = True
-    template_name = 'checkin/meeting_archive_week.html'
+    template_name = 'check_in/meeting_archive_week.html'
 
     def get_context_data(self, **kwargs):
         context = super(MeetingWeekArchiveView, self).get_context_data(**kwargs)
@@ -54,7 +54,7 @@ class MeetingWeekArchiveView(WeekArchiveView):
 class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
     model = models.StudentMeeting
     form_class = forms.StudentMeetingForm
-    template_name = 'checkin/student_meeting_form.html'
+    template_name = 'check_in/student_meeting_form.html'
     success_url = '/student_meeting/'
     success_message = "%(student)s's Meeting recorded"
 
