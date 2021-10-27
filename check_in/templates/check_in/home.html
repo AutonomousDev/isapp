@@ -13,15 +13,7 @@
     <li>Week summary works but may experience bugs as students add/drop</li>
     <li>Student list</li>
     <li>Student detail view</li>
+    <li>Buzz login to pull data by API</li>
 </ul>
-<form action="/about/" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-  <label for="username">Buzz username:</label><br>
-  <input type="text" id="username" name="username"><br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password">
-    <input type="submit">
-</form>
-
 
 {% endblock content %}
