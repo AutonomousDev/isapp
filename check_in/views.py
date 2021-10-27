@@ -18,6 +18,9 @@ def ae_login(request):
         buzz.login(request.username, request.password)
         return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
 
+def ae_login_form(request):
+    return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
+
 def about(request):
     return render(request, 'check_in/about.html', {'title': 'About'})
 
