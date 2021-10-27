@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'check_in.apps.Check_inConfig',
+    'check_in.apps.CheckInConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
