@@ -5,11 +5,11 @@
 <p>You will be automatically logged out if you are inactive for 3 hours</p>
 
 
-<form action="/about/" method="post" enctype="multipart/form-data">
+<form action="/AE_logged_in/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
   <lable for="school">School</lable>
   <select name="school">
-    <option value=”accelerate-mccloud”>McCloud HS</option>
+    <option value="accelerate-mccloud">McCloud HS</option>
   </select>
   <label for="username">Buzz username:</label><br>
   <input type="text" id="username" name="username"><br>

@@ -9,24 +9,16 @@ from check_in.buzz_request import BuzzRequest
 
 
 # Create your views here.
-def ae_login(request):  #not used??
+def ae_login(request):  # Used to process the login post
     user = None
     if request.user.is_authenticated:
         user = request.user
-    if request.POST.get(username) != None and request.POST.get(password) != None:
+    if request.POST.get('username') != None and request.POST.get('password') != None:
         buzz = BuzzRequest(user)
-        buzz.login(request.username, request.password, request.school)
+        buzz.login(request.POST.get('username'), request.POST.get('password'), request.POST.get('school'))
         return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
 
 def ae_login_form(request):
-
-    if request.POST.get(username) != None and request.POST.get(password) != None:
-        user = None
-        if request.user.is_authenticated:
-            user = request.user
-        buzz = BuzzRequest(user)
-        buzz.login(request.username, request.password, request.school)
-        return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
     return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
 
 def about(request):

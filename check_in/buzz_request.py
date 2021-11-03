@@ -8,7 +8,7 @@ class BuzzRequest:
 
     def __init__(self, _user, _token: str = ""):
         self._user = None
-        self._token
+        self._token = ""
 
     def get_user(self):
         return self._user
