@@ -13,6 +13,12 @@ def ae_login(request):  # Used to process the login post
     user = None
     if request.user.is_authenticated:
         user = request.user
+    else:
+        context = {
+            "message": "user is none",
+            "data": user
+        }
+        return render(request, 'debug.html', context)
     if request.POST.get('username') != None and request.POST.get('password') != None:
         buzz = BuzzRequest(user)
         buzz.login(request.POST.get('username'), request.POST.get('password'), request.POST.get('school'))
