@@ -2,11 +2,15 @@
 
 {% block content %}
 <h1>Authenticate your buzz login</h1>
-<p>You will be automatically logged out if you are inactive for 15 minutes</p>
-<!--todo Check this is the correct amount of time or update this if I extend the login token life -->
+<p>You will be automatically logged out if you are inactive for 3 hours</p>
+
 
 <form action="/about/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
+  <lable for="school">School</lable>
+  <select name="school">
+    <option value=”accelerate-mccloud”>McCloud HS</option>
+  </select>
   <label for="username">Buzz username:</label><br>
   <input type="text" id="username" name="username"><br>
   <label for="password">Password:</label><br>

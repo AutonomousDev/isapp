@@ -9,6 +9,7 @@ urlpatterns = [
     path('about/', views.about, name='check_in-about'),
     path('', views.home, name='check_in-home'),
     path('AE_login/', login_required(views.ae_login_form), name='check_in-ae_login_form'),
+    path('AE_logged_in/', login_required(views.ae_login), name='check_in-ae_login'),
     path('data/', login_required(views.Data.as_view()), name='check_in-data'),
     path('student/<int:pk>', login_required(views.StudentDetailView.as_view()), name='check_in-student-detail'),
     path('student_meeting/', login_required(views.StudentMeetingView.as_view()), name='check_in-student-meeting'),

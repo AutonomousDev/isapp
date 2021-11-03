@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     """Extended the built in user model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ae_token = models.TextField(default="")
+    ae_token = models.TextField(default="", blank=True)
     image = models.ImageField(default='default.JPG', upload_to='profile_pics')
 
     def __str__(self):

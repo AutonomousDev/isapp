@@ -15,11 +15,19 @@ def ae_login(request):  #not used??
         user = request.user
     if request.POST.get(username) != None and request.POST.get(password) != None:
         buzz = BuzzRequest(user)
-        buzz.login(request.username, request.password)
-        return render(request, 'check_in/AE_Login.html', {'title': 'AE_Login'})
+        buzz.login(request.username, request.password, request.school)
+        return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
 
 def ae_login_form(request):
-    return render(request, 'check_in/AE_Login_form.html', {'title': 'AE_Login'})
+
+    if request.POST.get(username) != None and request.POST.get(password) != None:
+        user = None
+        if request.user.is_authenticated:
+            user = request.user
+        buzz = BuzzRequest(user)
+        buzz.login(request.username, request.password, request.school)
+        return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
+    return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
 
 def about(request):
     return render(request, 'check_in/about.html', {'title': 'About'})

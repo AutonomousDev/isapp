@@ -4,7 +4,7 @@ from users.models import Profile
 
 
 class BuzzRequest:
-    """TODO doc string"""
+    """This class makes API calls to the Buzz api and returns the requested data."""
 
     def __init__(self, _user, _token: str = ""):
         self._user = None
@@ -25,8 +25,8 @@ class BuzzRequest:
         user.Profile.ae_token = self.get_token()
 
 
-    def login(self, username, password):
-        payload = {'cmd': 'login3', 'username': username, 'password': password}
+    def login(self, username, password, school):
+        payload = {'cmd': 'login3', 'username': school+"/"+username, 'password': password, 'expireseconds': 10800}
         r = requests.post('https://accelerate-mccloud.api.agilixbuzz.com/cmd', data=payload)
         r_dict = xmltodict.parse(r.text)
         self.set_token(r_dict['response']['user']['@token'])
