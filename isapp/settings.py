@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i)^ysia&pb)*r&z0&k$@is#(1w1@p8aw9d-%qxzy-k$q&rs-61'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["is-app.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -48,6 +48,7 @@ REDIS_PORT = 6379
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -158,3 +159,5 @@ SELECT2_CACHE_BACKEND = "select2"
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
