@@ -1,14 +1,13 @@
 import requests
 import xmltodict
-from users.models import Profile
 
 
 class BuzzRequest:
     """This class makes API calls to the Buzz api and returns the requested data."""
 
-    def __init__(self, _user, _token: str = ""):
-        self._user = None
-        self._token = ""
+    def __init__(self, app_user=None, token=""):
+        self._user = app_user
+        self._token = token
 
     def get_user(self):
         return self._user
@@ -21,21 +20,18 @@ class BuzzRequest:
 
     def store_token_to_db(self):
         user = self.get_user()
-        Profile.ae_token
-        user.Profile.ae_token = self.get_token()
-
+        user.profile.ae_token = self.get_token()
+        user.profile.save()
 
     def login(self, username, password, school):
-        payload = {'cmd': 'login3', 'username': school+"/"+username, 'password': password, 'expireseconds': 10800}
+        payload = {'cmd': 'login3', 'username': school + "/" + username, 'password': password, 'expireseconds': 10800}
         r = requests.post('https://accelerate-mccloud.api.agilixbuzz.com/cmd', data=payload)
         r_dict = xmltodict.parse(r.text)
         self.set_token(r_dict['response']['user']['@token'])
-
+        self.store_token_to_db()
 
     def hello_requests(self):
         payload = {"_token": self._token, 'cmd': 'listenrollmentsbyteacher', 'select': 'course,user'}
         r = requests.get('https://accelerate-mccloud.api.agilixbuzz.com/cmd', params=payload)
         print(r.text)
-
         return r
-
