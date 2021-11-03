@@ -27,6 +27,8 @@ class BuzzRequest:
         payload = {'cmd': 'login3', 'username': school + "/" + username, 'password': password, 'expireseconds': 10800}
         r = requests.post('https://accelerate-mccloud.api.agilixbuzz.com/cmd', data=payload)
         r_dict = xmltodict.parse(r.text)
+        if r_dict['response']['@code'] == 'InvalidCredentials':
+            return r_dict['response']['@code']
         self.set_token(r_dict['response']['user']['@token'])
         self.store_token_to_db()
 

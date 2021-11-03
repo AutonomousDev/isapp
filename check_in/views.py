@@ -6,6 +6,7 @@ from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.dates import WeekArchiveView
 from check_in.buzz_request import BuzzRequest
+from django.contrib import messages
 
 
 # Create your views here.
@@ -21,7 +22,9 @@ def ae_login(request):  # Used to process the login post
         return render(request, 'debug.html', context)
     if request.POST.get('username') != None and request.POST.get('password') != None:
         buzz = BuzzRequest(user)
-        buzz.login(request.POST.get('username'), request.POST.get('password'), request.POST.get('school'))
+        if buzz.login(request.POST.get('username'), request.POST.get('password'), request.POST.get('school')) == 'InvalidCredentials':
+            messages.error(request, f'Invalid username or password: ')
+            return redirect('check_in-ae_login_form')
         return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
 
 def ae_login_form(request):

@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*", "is-app.herokuapp.com", "127.0.0.1", "127.0.0.1:8000"]
 
+# Makes Error messages red
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 # Application definition
 
