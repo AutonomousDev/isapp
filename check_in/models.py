@@ -45,7 +45,7 @@ class Student(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a detailed record for this student"""
-        return reverse("checkin-student-detail", args=[str(self.id)])
+        return reverse("check_in-student-detail", args=[str(self.id)])
 
 
 class CourseEnrollment(models.Model):
