@@ -100,6 +100,7 @@ DATABASES = {
 }
 """
 
+# Populate credentials from .env file in root
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
