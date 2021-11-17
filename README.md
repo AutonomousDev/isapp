@@ -8,8 +8,13 @@ The root directory contains an untracked .env file with credentials. To make a n
 
 
 SECRET_KEY = 'your key goes here'
+
 DB_name = 'your db name goes here'
+
 DB_user = 'your db name goes here'
+
 DB_password = 'your db password goes here'
+
 DB_host = 'your db host goes here'
+
 DB_port = 'your db port goes here'
