@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
 class CourseProvider(models.Model):
     """Model representing course providers"""
     provider_name = models.CharField(max_length=200, help_text="Enter the course provider name.")

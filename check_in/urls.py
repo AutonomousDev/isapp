@@ -18,6 +18,7 @@ urlpatterns = [
     path('archive/' + str(datetime.date.today().year) + '/week/'+ str(datetime.date.today().strftime("%V")) + '/',
          login_required(MeetingWeekArchiveView.as_view()),
          name="check_in-meeting-archive-week-today"),
+    path('new_student/', login_required(views.pre_create_student), name='check_in-pre_new_student'),
 
 
 

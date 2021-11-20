@@ -1,0 +1,22 @@
+{% extends "check_in/base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<h1>Create Students</h1>
+<p>options</p>
+<ul>
+    <li>Create new student from api data</li>
+    <li>Edit existing student</li>
+    <li>Enroll/unenroll student</li>
+    <li>View student meeting records</li>
+</ul>
+
+<p>Output here</p>
+<ul>
+{% for enrollment in data %}
+<li>{{ enrollment.user.firstname }} {{ enrollment.user.lastname }}</li>
+
+{% endfor %}
+    </ul>
+
+{% endblock content %}

@@ -10,7 +10,8 @@ from django.contrib import messages
 
 
 # Create your views here.
-def ae_login(request):  # Used to process the login post
+def ae_login(request):  #
+    """Used to process the Accelerate Ed login post after hitting submit"""
     user = None
     if request.user.is_authenticated:
         user = request.user
@@ -28,6 +29,7 @@ def ae_login(request):  # Used to process the login post
         return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
 
 def ae_login_form(request):
+    """This view is used to authenticate to Accelerate Ed"""
     return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
 
 def about(request):
@@ -64,6 +66,7 @@ class MeetingWeekArchiveView(WeekArchiveView):
 
 
 class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
+    """This class view creates a student meeting form and records data to the DB"""
     model = models.StudentMeeting
     form_class = forms.StudentMeetingForm
     template_name = 'check_in/student_meeting_form.html'
@@ -83,6 +86,29 @@ class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+def manage_students(request):
+    """This page is a menu of student management options"""
+    return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
 
 
+def pre_create_student(request):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+        token = user.profile.ae_token
+    else:
+        context = {
+            "message": "user is none",
+            "data": user
+        }
+        return render(request, 'debug.html', context)
+
+
+    buzz = BuzzRequest(user, token)
+    response = buzz.get_enrollments()
+
+
+    #TODO some logic for expired token.
+
+    return render(request, 'check_in/pre_create_student.html', {'title': "Make Student", "data": response})
 

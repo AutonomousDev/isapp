@@ -1,5 +1,13 @@
 import requests
 import xmltodict
+from django.db import models
+from django.contrib.auth.models import User
+
+
+def sanitize_key(my_dict):
+    print("I was passed a: ", type(my_dict), "#############################################")
+    my_dict = {key.strip(): item for key, item in my_dict.items()}
+    return my_dict
 
 
 class BuzzRequest:
@@ -24,16 +32,26 @@ class BuzzRequest:
         user.profile.save()
 
     def login(self, username, password, school):
+        """Login to Accelerate Ed"""
         payload = {'cmd': 'login3', 'username': school + "/" + username, 'password': password, 'expireseconds': 10800}
         r = requests.post('https://accelerate-mccloud.api.agilixbuzz.com/cmd', data=payload)
-        r_dict = xmltodict.parse(r.text)
+        r_dict = xmltodict.parse(r.text, attr_prefix="")
         if r_dict['response']['@code'] == 'InvalidCredentials':
             return r_dict['response']['@code']
         self.set_token(r_dict['response']['user']['@token'])
         self.store_token_to_db()
 
-    def hello_requests(self):
+    def get_enrollments(self):
         payload = {"_token": self._token, 'cmd': 'listenrollmentsbyteacher', 'select': 'course,user'}
         r = requests.get('https://accelerate-mccloud.api.agilixbuzz.com/cmd', params=payload)
-        print(r.text)
-        return r
+        r_dict = xmltodict.parse(r.text, attr_prefix='')
+
+        # See the line below for an example of how to access the response data
+        # print(r_dict['response']['enrollments']['enrollment'][0]['user']['firstname'])
+
+        #print("**********************************************************")
+        #print(r_dict['response']['enrollments']['enrollment'][0])
+        return r_dict['response']['enrollments']['enrollment']
+
+    def get_students(self):
+        pass
