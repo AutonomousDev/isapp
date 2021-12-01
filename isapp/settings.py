@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
+REDIS_PORT = str(os.getenv('REDIS_PORT'))
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
