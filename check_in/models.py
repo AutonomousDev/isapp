@@ -37,7 +37,6 @@ class Student(models.Model):
     last_name = models.CharField(max_length=50, help_text="Student last name.")
     id_number = models.CharField(max_length=10, help_text="Student ID number")
     active = models.BooleanField(help_text="Uncheck box for inactive students", default=True)
-    course = models.ManyToManyField(Course, help_text="Select courses student is enrolled in.", blank=True, default='')
 
     def __str__(self):
         """String representing the Model object"""
@@ -54,8 +53,6 @@ class CourseEnrollment(models.Model):
     course = models.ForeignKey(Course, help_text="Select course student is enrolled in.", blank=True, default='', on_delete=models.PROTECT)
     start_date = models.DateField()
     end_date = models.DateField()
-
-
     def __str__(self):
         """String representing the Model object"""
         return str(self.student) + ": " + str(self.course)
