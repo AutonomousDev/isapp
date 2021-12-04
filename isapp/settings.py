@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'django_select2',
 ]
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = str(os.getenv('REDIS_PORT'))
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -160,6 +158,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'check_in-home'
 
 LOGIN_URL = 'login'
+
+
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = str(os.getenv('REDIS_PORT'))
 
 CACHES = {
     "default": {
