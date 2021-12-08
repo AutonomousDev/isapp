@@ -32,8 +32,11 @@
         <tbody>
         {% for this_student in student.all %}
         {% if this_student.active %}
+            <tr>
+                <td colspan="0"><hr></td>
+            </tr>
         <tr>
-            <td><hr><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
+            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
             <td colspan="0">
                 <ul>
                     {% for enrollment in this_student.courseenrollment_set.all %}
