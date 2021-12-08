@@ -33,9 +33,6 @@
         {% for this_student in student.all %}
         {% if this_student.active %}
         <tbody>
-            <tr>
-                <td colspan="4"></td>
-            </tr>
         <tr>
             <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
             <td colspan="3">
