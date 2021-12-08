@@ -29,9 +29,10 @@
             <th colspan="4">Student</th>
         </tr>
         </thead>
-        <tbody>
+        
         {% for this_student in student.all %}
         {% if this_student.active %}
+        <tbody>
             <tr>
                 <td colspan="4"></td>
             </tr>
@@ -49,18 +50,16 @@
                     </ul>
             </td>
         </tr>
-        <tr>
-            <td>   
-                    <tr>
+            <tr>
                         <th>Date</th>
                         <th>Attendance</th>
                         <th># of Missing Assignments</th>
                         <th>Narrative</th>
-                    </tr>                    
-                    <tbody>
+            </tr>                    
+                 
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
-                    <tr>
+            <tr>
                         <td>{{ meeting.appointment_date }}</td>
 
                         {% if meeting.attended_meeting %}
@@ -76,15 +75,13 @@
                         {% endif %}
 
                         <td>{{ meeting.narrative }}</td>
-                    </tr>
+            </tr>
                     {% endif %}
                     {% endfor %}
-                    </tbody>                
-            </td>
-        </tr>
+    </tbody>
         {% endif %}
         {% endfor %}
-        </tbody>
+        
     </table>
 </div>
 
