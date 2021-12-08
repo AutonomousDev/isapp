@@ -26,14 +26,14 @@
     <table>
         <thead>
         <tr>
-            <th>Student</th>
+            <th colspan="0">Student</th>
         </tr>
         </thead>
         <tbody>
         {% for this_student in student.all %}
         {% if this_student.active %}
         <tr>
-            <td colspan="3"><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4>
+            <td colspan="0"><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4>
                 <ul>
                     {% for enrollment in this_student.courseenrollment_set.all %}
                     {% if enrollment.start_date|date:"Y-m-d" < week|date:"Y-m-d"%}
@@ -46,18 +46,14 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <table class="table table-striped">
-                    <thead>
+            <td>   
                     <tr>
                         <th>Date</th>
                         <th>Attendance</th>
                         <th># of Missing Assignments</th>
                         <th>Narrative</th>
-                    </tr>
-                    </thead>
+                    </tr>                    
                     <tbody>
-
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
                     <tr>
@@ -79,8 +75,7 @@
                     </tr>
                     {% endif %}
                     {% endfor %}
-                    </tbody>
-                </table>
+                    </tbody>                
             </td>
         </tr>
         {% endif %}
