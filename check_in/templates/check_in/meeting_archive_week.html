@@ -34,8 +34,8 @@
         {% if this_student.active %}
         <tbody>
         <tr>
-            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></td>
-            <td colspan="3">
+            <th><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4></th>
+            <th colspan="3">
                 <ul>
                     {% for enrollment in this_student.courseenrollment_set.all %}
                     {% if enrollment.start_date|date:"Y-m-d" < week|date:"Y-m-d"%}
@@ -45,7 +45,7 @@
                     {% endif %}
                     {% endfor %}
                     </ul>
-            </td>
+            </th>
         </tr>
             <tr>
                         <th>Date</th>
