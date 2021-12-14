@@ -37,7 +37,7 @@
                     <a class="nav-item nav-link" href="{% url 'check_in-home' %}">Home</a>
                     {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'check_in-meeting-archive-week-today' %}">Week Summary</a>
-                    <a class="nav-item nav-link" href="{% url 'check_in-data' %}"> Student Data</a>
+                    <a class="nav-item nav-link" href="{% url 'check_in-data' %}"> Student List</a>
                     <a class="nav-item nav-link" href="{% url 'check_in-student-meeting' %}">Student Meeting Form</a>
                     {% endif %}
 
@@ -74,6 +74,7 @@
             {% endif %}
             {% block content %}{% endblock %}
         </div>
+        {% if user.is_authenticated %}
         <div class="col-md-4">
             <div class="content-section">
                 <h3>Quick menu</h3>
@@ -84,6 +85,7 @@
                 </p>
             </div>
         </div>
+        {% endif %}
     </div>
 </main>
 <!-- Optional JavaScript -->

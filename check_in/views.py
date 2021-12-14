@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import StudentMeeting, Student
+from .models import StudentMeeting, Student, CourseEnrollment
 from django.views import generic
 from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
@@ -50,10 +50,9 @@ class StudentDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(StudentDetailView, self).get_context_data(**kwargs)
-        context['studentmeeting'] = StudentMeeting.objects.filter(student=self.get_object()).order_by('appointment_date')
+        context['student_meetings'] = StudentMeeting.objects.filter(student=self.get_object()).order_by('appointment_date')
+        context['course_enrollments'] = CourseEnrollment.objects.filter(student=self.get_object()).order_by('course')
         return context
-
-
 
 
 class MeetingWeekArchiveView(WeekArchiveView):
@@ -64,7 +63,6 @@ class MeetingWeekArchiveView(WeekArchiveView):
     allow_future = True
     allow_empty = True
     template_name = 'check_in/meeting_archive_week.html'
-
 
     def get_context_data(self, **kwargs):
         context = super(MeetingWeekArchiveView, self).get_context_data(**kwargs)

@@ -3,7 +3,12 @@
 {% block content %}
 <h1>{{ student.last_name }}, {{ student.first_name }}</h1>
 
-<p><strong>Courses:</strong> {{ student.course.all|join:", " }}</p>
+<p><strong>Courses:</strong>
+    {% for enrollment in course_enrollments %}
+    {{ enrollment.course }}
+    {% endfor %}
+
+    {{ student.course.all|join:", " }}</p>
 
 
 <div style="margin-left:20px;margin-top:20px">
@@ -18,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for meeting in studentmeeting reversed %}
+        {% for meeting in student_meetings reversed %}
             <tr>
                 <td>{{ meeting.appointment_date }}</td>
                 <td>{{ meeting.attended_meeting }}</td>
