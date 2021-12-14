@@ -41,25 +41,34 @@ def home(request):
 class Data(generic.ListView):
     """List of students with links to each student"""
     model = Student
+    ordering = ['last_name', 'first_name']
 
 
 class StudentDetailView(generic.DetailView):
     """List of student meetings for selected student"""
     model = Student
 
+    def get_context_data(self, **kwargs):
+        context = super(StudentDetailView, self).get_context_data(**kwargs)
+        context['studentmeeting'] = StudentMeeting.objects.filter(student=self.get_object()).order_by('appointment_date')
+        return context
+
+
+
 
 class MeetingWeekArchiveView(WeekArchiveView):
     """This view is used to view all meetings in a week"""
-    queryset = StudentMeeting.objects.all()
+    queryset = StudentMeeting.objects.all().order_by('appointment_date')
     date_field = "appointment_date"
     week_format = "%W"
     allow_future = True
     allow_empty = True
     template_name = 'check_in/meeting_archive_week.html'
 
+
     def get_context_data(self, **kwargs):
         context = super(MeetingWeekArchiveView, self).get_context_data(**kwargs)
-        context['student'] = Student.objects.all()
+        context['student'] = Student.objects.all().order_by('last_name', 'first_name')
         return context
 
 
@@ -81,8 +90,3 @@ class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
         student_meeting.instructor = self.request.user
         student_meeting.save()
         return super().form_valid(form)
-
-
-
-
-

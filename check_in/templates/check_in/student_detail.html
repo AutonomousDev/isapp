@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for meeting in student.studentmeeting_set.all reversed %}
+        {% for meeting in studentmeeting reversed %}
             <tr>
                 <td>{{ meeting.appointment_date }}</td>
                 <td>{{ meeting.attended_meeting }}</td>

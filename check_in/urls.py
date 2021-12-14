@@ -15,7 +15,7 @@ urlpatterns = [
     path('student_meeting/', login_required(views.StudentMeetingView.as_view()), name='check_in-student-meeting'),
     path('archive/<int:year>/week/<int:week>/', login_required(MeetingWeekArchiveView.as_view()), name="check_in-meeting-archive-week"),
 
-    path('archive/' + str(datetime.date.today().year) + '/week/'+ str(datetime.date.today().strftime("%V")) + '/',
+    path('archive/' + str(datetime.date.today().year) + '/week/' + str(datetime.date.today().strftime("%V")) + '/',
          login_required(MeetingWeekArchiveView.as_view()),
          name="check_in-meeting-archive-week-today"),
 

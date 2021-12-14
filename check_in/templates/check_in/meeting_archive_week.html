@@ -86,8 +86,7 @@
     <ul class="pagination pagination-lg justify-content-center">
         {% if previous_week %}
         <li class="page-item ">
-            <a class="page-link" href="{% url 'check_in-meeting-archive-week' previous_week|date:"Y"
-            previous_week|date:"W" %}" tabindex="-1">
+            <a class="page-link" href="{% url 'check_in-meeting-archive-week' previous_week|date:"Y" previous_week|date:"W" %}" tabindex="-1">
             Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
             </a>
         </li>

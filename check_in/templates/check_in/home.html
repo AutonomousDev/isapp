@@ -1,19 +1,17 @@
 {% extends "check_in/base.html" %}
 
 {% block content %}
-<h1>Home login page</h1>
-<p>new stuff today</p>
+<h1>Home</h1>
+{% if not user.is_authenticated %}
+<p>Please <a href="{% url 'login' %}"> login</a></p>
+{% else %}
+<p>Options for student meetings and viewing data available in the top bar.</p>
+<h3>Coming soon</h3>
 <ul>
-    <li>Content blocks added</li>
-    <li>CSS</li>
-    <li>form models for the database</li>
-    <li>User registration</li>
-    <li>User logins work</li>
-    <li>Check in form works</li>
-    <li>Week summary works but may experience bugs as students add/drop</li>
-    <li>Student list</li>
-    <li>Student detail view</li>
-    <li>Buzz login to pull data by API</li>
+    <li>Auto populating meeting data from Accelerate Ed</li>
+    <li>Calendar appointment system</li>
+
 </ul>
+{% endif %}
 
 {% endblock content %}
