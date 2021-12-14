@@ -25,7 +25,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*", "is-app.herokuapp.com", "127.0.0.1", "127.0.0.1:8000"]
+ALLOWED_HOSTS = ["is-app.herokuapp.com", "127.0.0.1", "127.0.0.1:8000"]
 
 # Makes Error messages red
 from django.contrib.messages import constants as messages
