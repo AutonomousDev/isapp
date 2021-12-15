@@ -26,8 +26,16 @@
         {% for meeting in student_meetings reversed %}
             <tr>
                 <td>{{ meeting.appointment_date }}</td>
-                <td>{{ meeting.attended_meeting }}</td>
+                {% if meeting.attended_meeting %}
+                <td>Attended Meeting</td>
+                {% else %}
+                <td class="table-warning">Did not Attended Meeting</td>
+                {% endif %}
+                {% if meeting.missing_work_amount != 0 %}
+                <td class="table-danger">{{ meeting.missing_work_amount }}</td>
+                {% else %}
                 <td>{{ meeting.missing_work_amount }}</td>
+                {% endif %}
                 <td>{{ meeting.narrative }}</td>
             </tr>
         {% endfor %}
