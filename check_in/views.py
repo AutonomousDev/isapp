@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from .models import StudentMeeting, Student, CourseEnrollment
-from django.views import generic
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView)
 from . import forms, models
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.dates import WeekArchiveView
 from check_in.buzz_request import BuzzRequest
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
@@ -38,13 +43,13 @@ def home(request):
     return render(request, 'check_in/home.html', {'title': 'Home'})
 
 
-class Data(generic.ListView):
+class StudentListView(LoginRequiredMixin, ListView):
     """List of students with links to each student"""
     model = Student
     ordering = ['last_name', 'first_name']
 
 
-class StudentDetailView(generic.DetailView):
+class StudentDetailView(LoginRequiredMixin, DetailView):
     """List of student meetings for selected student"""
     model = Student
 
@@ -55,7 +60,7 @@ class StudentDetailView(generic.DetailView):
         return context
 
 
-class MeetingWeekArchiveView(WeekArchiveView):
+class MeetingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
     """This view is used to view all meetings in a week"""
     queryset = StudentMeeting.objects.all().order_by('appointment_date')
     date_field = "appointment_date"
@@ -70,7 +75,7 @@ class MeetingWeekArchiveView(WeekArchiveView):
         return context
 
 
-class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
+class StudentMeetingView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = models.StudentMeeting
     form_class = forms.StudentMeetingForm
     template_name = 'check_in/student_meeting_form.html'
@@ -88,3 +93,9 @@ class StudentMeetingView(SuccessMessageMixin, generic.CreateView):
         student_meeting.instructor = self.request.user
         student_meeting.save()
         return super().form_valid(form)
+
+
+class StudentMeetingDetailView(LoginRequiredMixin, DetailView):
+    """This view shows a single StudentMeeting. If the user is the author the template has
+    update and delete buttons"""
+    model = models.StudentMeeting
