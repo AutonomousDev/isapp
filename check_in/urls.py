@@ -8,9 +8,10 @@ from .views import (
     ae_login,
     StudentListView,
     StudentDetailView,
-    StudentMeetingView,
+    StudentMeetingCreateView,
     MeetingWeekArchiveView,
-    StudentMeetingDetailView
+    StudentMeetingDetailView,
+    StudentMeetingUpdateView
     )
 
 
@@ -25,7 +26,8 @@ urlpatterns = [
     path('archive/' + str(datetime.date.today().year) + '/week/' + str(datetime.date.today().strftime("%V")) + '/',
          login_required(MeetingWeekArchiveView.as_view()),
          name="check_in-meeting-archive-week-today"),
+    path('student_meeting/new/', StudentMeetingCreateView.as_view(), name='check_in-student-meeting'),
     path('student_meeting/<int:pk>/', StudentMeetingDetailView.as_view(), name='student_meeting-detail'),
-    path('student_meeting/new/', login_required(StudentMeetingView.as_view()), name='check_in-student-meeting'),
+    path('student_meeting/<int:pk>/update/', StudentMeetingUpdateView.as_view(), name='student_meeting-update'),
 
 ]

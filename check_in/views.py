@@ -6,7 +6,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView)
-from . import forms, models
+from . import forms
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.dates import WeekArchiveView
 from check_in.buzz_request import BuzzRequest
@@ -75,11 +75,11 @@ class MeetingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
         return context
 
 
-class StudentMeetingView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = models.StudentMeeting
+class StudentMeetingCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = StudentMeeting
     form_class = forms.StudentMeetingForm
-    template_name = 'check_in/student_meeting_form.html'
-    success_url = '/student_meeting/'
+
+    success_url = '/student_meeting/new/'
     success_message = "%(student)s's Meeting recorded"
 
     def get_success_message(self, cleaned_data):
@@ -98,4 +98,30 @@ class StudentMeetingView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class StudentMeetingDetailView(LoginRequiredMixin, DetailView):
     """This view shows a single StudentMeeting. If the user is the author the template has
     update and delete buttons"""
-    model = models.StudentMeeting
+    model = StudentMeeting
+
+
+class StudentMeetingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """This view is used for updating posts"""
+    model = StudentMeeting
+    template_name = "check_in/studentmeeting_update.html"
+    fields = [
+        'appointment_date',
+        'attended_meeting',
+        'missing_work_amount',
+        'narrative',
+    ]
+
+    def form_valid(self, form):
+        """Set author before validating the form"""
+        form.instance.instructor = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        """Logic for checking the current user is the same as the author before they can
+        make updates"""
+        post = self.get_object()
+        if self.request.user == post.instructor:
+            return True
+        else:
+            return False
