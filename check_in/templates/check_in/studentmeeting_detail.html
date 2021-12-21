@@ -1,8 +1,9 @@
 {% extends "check_in/base.html" %}
 
 {% block content %}
+<a href="{% url 'check_in-student-detail' object.student.id %}">
 <h1>{{ object.student.last_name }}, {{ object.student.first_name }}</h1>
-
+</a>
 <div style="margin-left:20px;margin-top:20px">
     <h4>Meeting Data</h4>
     {% if object.instructor == user %}

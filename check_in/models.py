@@ -53,6 +53,7 @@ class CourseEnrollment(models.Model):
     course = models.ForeignKey(Course, help_text="Select course student is enrolled in.", blank=True, default='', on_delete=models.PROTECT)
     start_date = models.DateField()
     end_date = models.DateField()
+
     def __str__(self):
         """String representing the Model object"""
         return str(self.student) + ": " + str(self.course)
@@ -73,6 +74,7 @@ class StudentMeeting(models.Model):
         return str(self.appointment_date) + ": " + self.student.last_name + ", " + self.student.first_name
 
     def get_absolute_url(self):
+        """Returns a url to the detail view for the meeting"""
         return reverse('student_meeting-detail', kwargs={'pk': self.pk})
 
 

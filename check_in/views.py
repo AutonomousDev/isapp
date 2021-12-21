@@ -12,6 +12,7 @@ from django.views.generic.dates import WeekArchiveView
 from check_in.buzz_request import BuzzRequest
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse
 
 
 # Create your views here.
@@ -101,7 +102,7 @@ class StudentMeetingDetailView(LoginRequiredMixin, DetailView):
     model = StudentMeeting
 
 
-class StudentMeetingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class StudentMeetingUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     """This view is used for updating posts"""
     model = StudentMeeting
     template_name = "check_in/studentmeeting_update.html"
@@ -111,6 +112,8 @@ class StudentMeetingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateVi
         'missing_work_amount',
         'narrative',
     ]
+    success_message = "Meeting has been updated!"
+
 
     def form_valid(self, form):
         """Set author before validating the form"""
