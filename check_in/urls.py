@@ -2,7 +2,6 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 import datetime
 from .views import (
-    about,
     home,
     ae_login_form,
     ae_login,
