@@ -8,7 +8,8 @@ from django.dispatch import receiver
 class Profile(models.Model):
     """Extended the built in user model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ae_token = models.TextField(default="", blank=True)
+    ae_id = models.CharField(max_length=20, default="", blank="", help_text="This is used to link AE accounts to your account") #todo set editable=False for production
+    ae_token = models.TextField(default="", blank=True, editable=False)
 
     def __str__(self):
         """displays fstring when user is returned"""

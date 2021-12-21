@@ -129,10 +129,6 @@ class StudentMeetingUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPass
         else:
             return False
 
-def manage_students(request):
-    """This page is a menu of student management options"""
-    return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
-
 
 class StudentMeetingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """Deletes the posts and redirects to home."""
@@ -148,6 +144,11 @@ class StudentMeetingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteVi
             return True
         else:
             return False
+
+
+def manage_students(request):
+    """This page is a menu of student management options"""
+    return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
 
 
 def pre_create_student(request):

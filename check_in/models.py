@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
 class CourseProvider(models.Model):
     """Model representing course providers"""
     provider_name = models.CharField(max_length=200, help_text="Enter the course provider name.")
@@ -32,12 +31,21 @@ class Course(models.Model):
         return f'{self.course_name}'
 
 
+class School(models.Model):
+    """This model is used to help with API call to Accelerate Ed"""
+    name = models.CharField(max_length=100, help_text="Name of the school")
+    ae_subdomain = models.CharField(max_length=200, default="", blank=True,
+                                    help_text="Enter the subdomain of the accelerate ed site. Ex: 'hogwarts.agilixbuzz.com' would be 'hogwarts'.")
+    ae_domainid = models.CharField(max_length=20, default="", blank="", help_text="This value is used to make API calls to accelerate ed. Leave blank if your not sure.")
+
+
 class Student(models.Model):
     """Model representing a student"""
     first_name = models.CharField(max_length=50, help_text="Student first name.")
     last_name = models.CharField(max_length=50, help_text="Student last name.")
     id_number = models.CharField(max_length=10, help_text="Student ID number")
     active = models.BooleanField(help_text="Uncheck box for inactive students", default=True)
+    ae_id = models.CharField(max_length=20, default="", blank=True, help_text="This value is used to link AE accounts to students.")
 
     def __str__(self):
         """String representing the Model object"""
@@ -54,6 +62,9 @@ class CourseEnrollment(models.Model):
     course = models.ForeignKey(Course, help_text="Select course student is enrolled in.", blank=True, default='', on_delete=models.PROTECT)
     start_date = models.DateField()
     end_date = models.DateField()
+    school = models.ForeignKey(School, help_text="Select school providing course.", on_delete=models.SET_NULL, null=True, blank=True)
+    ae_id = models.CharField(max_length=20, default="", blank=True,
+                             help_text="This value is used to link AE course to the app.")
 
     def __str__(self):
         """String representing the Model object"""

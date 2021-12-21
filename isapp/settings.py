@@ -85,15 +85,15 @@ WSGI_APPLICATION = 'isapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-""" # Deactivated for deployment
+# Deactivated for deployment
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-"""
 
+"""
 # Populate credentials from .env file in root
 DATABASES = {
     'default': {
@@ -105,7 +105,7 @@ DATABASES = {
         'PORT': str(os.getenv('DB_port')),
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
