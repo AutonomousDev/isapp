@@ -23,7 +23,7 @@ def ae_login(request):  #
     if request.user.is_authenticated:
         user = request.user
         context = {
-            "message": "You are signed in",
+            "message": "You are signed in to agilixbuzz.com for 3 hours",
             "data": user,
             'title': 'AE_Login'
         }
