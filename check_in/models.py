@@ -36,7 +36,7 @@ class School(models.Model):
     name = models.CharField(max_length=100, help_text="Name of the school")
     ae_subdomain = models.CharField(max_length=200, default="", blank=True,
                                     help_text="Enter the subdomain of the accelerate ed site. Ex: 'hogwarts.agilixbuzz.com' would be 'hogwarts'.")
-    ae_domainid = models.CharField(max_length=20, default="", blank="", help_text="This value is used to make API calls to accelerate ed. Leave blank if your not sure.")
+    ae_domainid = models.CharField(max_length=20, default="", blank=True, help_text="This value is used to make API calls to accelerate ed. Leave blank if your not sure.")
 
 
 class Student(models.Model):

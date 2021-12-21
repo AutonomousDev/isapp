@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentMeeting, Student, CourseEnrollment
+from .models import StudentMeeting, Student, CourseEnrollment, School
 from django.views.generic import (
     ListView,
     DetailView,
@@ -19,9 +19,17 @@ from django.urls import reverse
 def ae_login(request):  #
     """Used to process the Accelerate Ed login post after hitting submit"""
     user = None
+    context = {}
     if request.user.is_authenticated:
         user = request.user
-    else:
+        context = {
+            "message": "You are signed in",
+            "data": user,
+            'title': 'AE_Login'
+        }
+
+    else:  # This error message has to do with an unauthenticated user signing into AE with valid credentials.
+        # TODO Prevent this from happening initally with authentication checks.
         context = {
             "message": "user is none",
             "data": user
@@ -32,12 +40,17 @@ def ae_login(request):  #
         if buzz.login(request.POST.get('username'), request.POST.get('password'), request.POST.get('school')) == 'InvalidCredentials':
             messages.error(request, f'Invalid username or password: ')
             return redirect('check_in-ae_login_form')
-        return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
+        return render(request, 'check_in/ae_login.html', context)
 
 
 def ae_login_form(request):
     """This view is used to authenticate to Accelerate Ed"""
-    return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
+    schools = School.objects.all()
+    context = {
+        'schools': schools,
+        'title': 'AE_Login'
+    }
+    return render(request, 'check_in/ae_login_form.html', context)
 
 
 def home(request):

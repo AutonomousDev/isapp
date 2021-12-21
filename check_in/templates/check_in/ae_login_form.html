@@ -9,7 +9,9 @@
     {% csrf_token %}
   <lable for="school">School</lable>
   <select class="form-control" name="school">
-    <option value="accelerate-mccloud">McCloud HS</option><!-- TODO un-hardcode this -->
+    {% for school in schools %}
+    <option value="{{ school.ae_subdomain }}"> {{ school.name }} </option><!-- TODO un-hardcode this -->
+    {% endfor %}
   </select>
   <hr>
   <label for="username">Buzz username:</label><br>
