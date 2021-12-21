@@ -17,7 +17,6 @@ from .views import (
 
 
 urlpatterns = [
-    path('about/', about, name='check_in-about'),
     path('', home, name='check_in-home'),
     path('AE_login/', login_required(ae_login_form), name='check_in-ae_login_form'),
     path('AE_logged_in/', login_required(ae_login), name='check_in-ae_login'),

@@ -33,11 +33,9 @@ def ae_login(request):  # Used to process the login post
             return redirect('check_in-ae_login_form')
         return render(request, 'check_in/ae_login.html', {'title': 'AE_Login'})
 
+
 def ae_login_form(request):
     return render(request, 'check_in/ae_login_form.html', {'title': 'AE_Login'})
-
-def about(request):
-    return render(request, 'check_in/about.html', {'title': 'About'})
 
 
 def home(request):
