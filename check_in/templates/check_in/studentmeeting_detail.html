@@ -4,34 +4,39 @@
 <h1>{{ object.student.last_name }}, {{ object.student.first_name }}</h1>
 
 <div style="margin-left:20px;margin-top:20px">
-    <h4>Meetings</h4>
+    <h4>Meeting Data</h4>
+    {% if object.instructor == user %}
+    <!-- Author edit and delete controls -->
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student_meeting-update' object.id %}">Update</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+    {% endif %}
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Date</th>
-                <th>Attendance</th>
-                <th># of Missing Assignments</th>
-                <th>Narrative</th>
-            </tr>
+        <tr>
+            <th>Date</th>
+            <th>Attendance</th>
+            <th># of Missing Assignments</th>
+            <th>Narrative</th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>{{ object.appointment_date }}</td>
-                {% if object.attended_meeting %}
-                <td>Attended Meeting</td>
-                {% else %}
-                <td class="table-warning">Absent</td>
-                {% endif %}
-                {% if object.missing_work_amount != 0 %}
-                <td class="table-danger">{{ object.missing_work_amount }}</td>
-                {% else %}
-                <td>{{ object.missing_work_amount }}</td>
-                {% endif %}
-                <td>{{ object.narrative }}</td>
-            </tr>
+        <tr>
+            <td>{{ object.appointment_date }}</td>
+            {% if object.attended_meeting %}
+            <td>Attended Meeting</td>
+            {% else %}
+            <td class="table-warning">Absent</td>
+            {% endif %}
+            {% if object.missing_work_amount != 0 %}
+            <td class="table-danger">{{ object.missing_work_amount }}</td>
+            {% else %}
+            <td>{{ object.missing_work_amount }}</td>
+            {% endif %}
+            <td>{{ object.narrative }}</td>
+        </tr>
         </tbody>
 
     </table>
-  </div>
+</div>
 
 {% endblock content %}

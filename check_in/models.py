@@ -72,13 +72,10 @@ class StudentMeeting(models.Model):
         """String representing the Model object"""
         return str(self.appointment_date) + ": " + self.student.last_name + ", " + self.student.first_name
 
-"""
-# Depreciated to use CourseEnrollment
-@receiver(post_save, sender=StudentMeeting)
-def set_current_courses(sender, instance, created, **kwargs):
-    if created:
-        instance.current_courses.set(instance.student.course.all())
-"""
+    def get_absolute_url(self):
+        return reverse('student_meeting-detail', kwargs={'pk': self.pk})
+
+
 
 
 

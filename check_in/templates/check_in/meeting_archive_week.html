@@ -55,7 +55,7 @@
             </tr>
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
-            <tr>
+            <tr onclick="window.location='{% url 'student_meeting-detail' meeting.id %}';">
                         <td>{{ meeting.appointment_date }}</td>
 
                         {% if meeting.attended_meeting %}
