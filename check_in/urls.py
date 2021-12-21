@@ -29,7 +29,7 @@ urlpatterns = [
     path('student_meeting/<int:pk>/', StudentMeetingDetailView.as_view(), name='student_meeting-detail'),
     path('student_meeting/<int:pk>/update/', StudentMeetingUpdateView.as_view(), name='student_meeting-update'),
     path('project/<int:pk>/delete/', StudentMeetingDeleteView.as_view(), name='student_meeting-delete'),
-    path('new_student/', login_required(views.pre_create_student), name='check_in-pre_new_student'),
+    # path('new_student/', login_required(views.pre_create_student), name='check_in-pre_new_student'),
 
 
 
