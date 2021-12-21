@@ -9,7 +9,7 @@
     {% if object.instructor == user %}
     <!-- Author edit and delete controls -->
     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student_meeting-update' object.id %}">Update</a>
-    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student_meeting-delete' object.id %}">Delete</a>
     {% endif %}
     <table class="table table-striped">
         <thead>

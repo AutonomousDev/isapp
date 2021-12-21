@@ -114,7 +114,6 @@ class StudentMeetingUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPass
     ]
     success_message = "Meeting has been updated!"
 
-
     def form_valid(self, form):
         """Set author before validating the form"""
         form.instance.instructor = self.request.user
@@ -125,6 +124,21 @@ class StudentMeetingUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPass
         make updates"""
         post = self.get_object()
         if self.request.user == post.instructor:
+            return True
+        else:
+            return False
+
+
+class StudentMeetingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Deletes the posts and redirects to home."""
+    model = StudentMeeting
+    success_url = '/'
+
+    def test_func(self):
+        """Logic for checking the current user is the same as the author before they can
+        make deletes"""
+        student_meeting = self.get_object()
+        if self.request.user == student_meeting.instructor:
             return True
         else:
             return False

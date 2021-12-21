@@ -11,7 +11,8 @@ from .views import (
     StudentMeetingCreateView,
     MeetingWeekArchiveView,
     StudentMeetingDetailView,
-    StudentMeetingUpdateView
+    StudentMeetingUpdateView,
+    StudentMeetingDeleteView
     )
 
 
@@ -29,5 +30,5 @@ urlpatterns = [
     path('student_meeting/new/', StudentMeetingCreateView.as_view(), name='check_in-student-meeting'),
     path('student_meeting/<int:pk>/', StudentMeetingDetailView.as_view(), name='student_meeting-detail'),
     path('student_meeting/<int:pk>/update/', StudentMeetingUpdateView.as_view(), name='student_meeting-update'),
-
+    path('project/<int:pk>/delete/', StudentMeetingDeleteView.as_view(), name='student_meeting-delete'),
 ]
