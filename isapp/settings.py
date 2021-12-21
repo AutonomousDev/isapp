@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -24,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG_MODE'))
 
-ALLOWED_HOSTS = ["*", "is-app.herokuapp.com", "127.0.0.1", "127.0.0.1:8000"]
+ALLOWED_HOSTS = ["is-app.herokuapp.com", "127.0.0.1", "127.0.0.1:8000"]
 
 # Makes Error messages red
 from django.contrib.messages import constants as messages
@@ -49,8 +48,6 @@ INSTALLED_APPS = [
     'django_select2',
 ]
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -161,14 +158,21 @@ LOGIN_REDIRECT_URL = 'check_in-home'
 
 LOGIN_URL = 'login'
 
+
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = str(os.getenv('REDIS_PORT'))
+
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "unique-snowflake",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get('REDIS_URL'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     },
     "select2": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
+        "LOCATION": os.environ.get('REDIS_URL'),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

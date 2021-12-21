@@ -8,14 +8,15 @@
 <form action="/AE_logged_in/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
   <lable for="school">School</lable>
-  <select name="school">
-    <option value="accelerate-mccloud">McCloud HS</option>
+  <select class="form-control" name="school">
+    <option value="accelerate-mccloud">McCloud HS</option><!-- TODO un-hardcode this -->
   </select>
+  <hr>
   <label for="username">Buzz username:</label><br>
-  <input type="text" id="username" name="username"><br>
+  <input class="form-control" type="text" id="username" name="username"><br>
   <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password">
-    <input type="submit">
+  <input class="form-control" type="password" id="password" name="password">
+  <input class="btn btn-primary mt-3" type="submit" value="Login To Buzz">
 </form>
 
 

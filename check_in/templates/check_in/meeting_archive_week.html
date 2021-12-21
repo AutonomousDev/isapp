@@ -23,17 +23,19 @@
 </nav>
 
 <div>
-    <table>
-        <thead>
+    <table class="table table-hover">
+        <thead class="">
         <tr>
-            <th>Student</th>
+            <th colspan="4">Student</th>
         </tr>
         </thead>
-        <tbody>
+        
         {% for this_student in student.all %}
         {% if this_student.active %}
+        <tbody>
         <tr>
-            <td><h4>{{this_student.last_name}}, {{this_student.first_name}}</h4>
+            <th>{{this_student.last_name}}, {{this_student.first_name}}</th>
+            <th colspan="3">
                 <ul>
                     {% for enrollment in this_student.courseenrollment_set.all %}
                     {% if enrollment.start_date|date:"Y-m-d" < week|date:"Y-m-d"%}
@@ -43,49 +45,38 @@
                     {% endif %}
                     {% endfor %}
                     </ul>
-            </td>
+            </th>
         </tr>
-        <tr>
-            <td>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
+            <tr>
                         <th>Date</th>
                         <th>Attendance</th>
                         <th># of Missing Assignments</th>
                         <th>Narrative</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
+            </tr>
                     {% for meeting in object_list %}
                     {% if meeting.student == this_student %}
-                    <tr>
+            <tr onclick="window.location='{% url 'student_meeting-detail' meeting.id %}';">
                         <td>{{ meeting.appointment_date }}</td>
 
                         {% if meeting.attended_meeting %}
-                        <td>{{ meeting.attended_meeting }}</td>
+                        <td>Attended Meeting</td>
                         {% else %}
-                        <td style="background-color: DarkOrange;">{{ meeting.attended_meeting }}</td>
+                        <td class="table-warning">Absent</td>
                         {% endif %}
 
                         {% if meeting.missing_work_amount != 0 %}
-                        <td style="background-color: IndianRed;">{{ meeting.missing_work_amount }}</td>
+                        <td class="table-danger">{{ meeting.missing_work_amount }}</td>
                         {% else %}
                         <td>{{ meeting.missing_work_amount }}</td>
                         {% endif %}
-
                         <td>{{ meeting.narrative }}</td>
-                    </tr>
+            </tr>
                     {% endif %}
                     {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-        </tr>
+    </tbody>
         {% endif %}
         {% endfor %}
-        </tbody>
+        
     </table>
 </div>
 
@@ -93,8 +84,7 @@
     <ul class="pagination pagination-lg justify-content-center">
         {% if previous_week %}
         <li class="page-item ">
-            <a class="page-link" href="{% url 'check_in-meeting-archive-week' previous_week|date:"Y"
-            previous_week|date:"W" %}" tabindex="-1">
+            <a class="page-link" href="{% url 'check_in-meeting-archive-week' previous_week|date:"Y" previous_week|date:"W" %}" tabindex="-1">
             Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
             </a>
         </li>
