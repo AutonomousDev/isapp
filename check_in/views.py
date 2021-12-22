@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentMeeting, Student, CourseEnrollment, School
+from .models import StudentMeeting, Student, CourseEnrollment, School, Course, CourseProvider
 from django.views.generic import (
     ListView,
     DetailView,
@@ -157,6 +157,18 @@ class StudentMeetingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteVi
             return True
         else:
             return False
+
+def manage_school(request):
+    """This portal is for managing schools"""
+    schools = School.objects.all()
+    course_providers = CourseProvider.objects.all()
+    courses = Course.objects.all()
+    context = {
+        'schools': schools,
+        'title': 'Manage School'
+    }
+    return render(request, 'check_in/school_manage.html', context)
+
 
 
 def manage_students(request):

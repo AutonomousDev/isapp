@@ -38,6 +38,10 @@ class School(models.Model):
                                     help_text="Enter the subdomain of the accelerate ed site. Ex: 'hogwarts.agilixbuzz.com' would be 'hogwarts'.")
     ae_domainid = models.CharField(max_length=20, default="", blank=True, help_text="This value is used to make API calls to accelerate ed. Leave blank if your not sure.")
 
+    def __str__(self):
+        """String representing the Model object"""
+        return self.name
+
 
 class Student(models.Model):
     """Model representing a student"""

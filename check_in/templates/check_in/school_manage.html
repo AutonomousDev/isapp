@@ -1,0 +1,32 @@
+{% extends "check_in/base.html" %}
+{% block content %}
+<h1>School Management Menu</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Active Schools</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for school in schools%}
+    <tr>
+        <td>{{ school }}</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+Coming soon
+<ul>
+    <li>Course providers</li>
+    <li>Courses</li>
+    <li>Student add/delete</li>
+    <li>Enroll students</li>
+</ul>
+
+
+{% endblock content %}

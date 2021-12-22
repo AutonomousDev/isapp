@@ -1,0 +1,13 @@
+{% if user.is_authenticated %}
+<div class="col-md-4">
+    <div class="content-section">
+        <h3>Quick menu</h3>
+        <p class='text-muted'><!-- Some text looks slick here but I have nothing to say -->
+        <ul class="list-group">
+            <a class="list-group-item list-group-item-light" href="{% url 'check_in-ae_login_form' %}">Log in to
+                Accelerate ED</a>
+        </ul>
+        </p>
+    </div>
+</div>
+{% endif %}
