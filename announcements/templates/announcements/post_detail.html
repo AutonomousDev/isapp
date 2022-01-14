@@ -1,0 +1,31 @@
+{% extends "check_in/base.html" %}
+{% block content %}
+
+<article class="rounded mb-3 card" xmlns="http://www.w3.org/1999/html">
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="{{ object.author.profile.image.url }}" class="rounded-circle article-img">
+        </div>
+        <div class="card-metadata flex-grow-1 ms-3">
+            <h2 class="card-title">{{ object.title }}</h2>
+            <a class="me-2" href="#">{{ object.author.first_name }} {{ object.author.last_name }}</a>
+            <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+            {% if object.project %}
+            <a href="{% url 'project-detail' object.project.id %}">
+                {{ object.project }}
+            </a>
+            {% endif %}
+            {% if object.author == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-content">
+         {{ object.content|safe }}
+    </div>
+</article>
+
+{% endblock content %}
