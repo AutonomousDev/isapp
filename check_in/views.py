@@ -53,9 +53,10 @@ def ae_login_form(request):
     return render(request, 'check_in/ae_login_form.html', context)
 
 
+""" todo Phasing out
 def home(request):
     return render(request, 'check_in/home.html', {'title': 'Home'})
-
+"""
 
 class StudentListView(LoginRequiredMixin, ListView):
     """List of students with links to each student"""

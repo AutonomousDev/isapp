@@ -1,0 +1,13 @@
+{% extends "check_in/base.html" %}
+
+{% block content %}
+<h1>Announcements</h1>
+{% if not user.is_authenticated %}
+<p>Please <a href="{% url 'login' %}"> login</a></p>
+{% else %}
+
+{% include 'announcements/component_post_list.html' %}
+
+{% endif %}
+
+{% endblock content %}

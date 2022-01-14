@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 import datetime
 from .views import (
-    home,
+    #home,
     ae_login_form,
     ae_login,
     StudentListView,
@@ -17,7 +17,7 @@ from .views import (
 
 
 urlpatterns = [
-    path('', home, name='check_in-home'),
+    # path('', home, name='check_in-home'), # Moved to announcements
     path('AE_login/', login_required(ae_login_form), name='check_in-ae_login_form'),
     path('AE_logged_in/', login_required(ae_login), name='check_in-ae_login'),
     path('student_list/', StudentListView.as_view(), name='check_in-data'),
