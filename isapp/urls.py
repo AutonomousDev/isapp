@@ -19,6 +19,7 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth.decorators import login_required
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('check_in/', include('check_in.urls')),
@@ -29,4 +30,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', user_views.profile, name='profile'),
     path("select2/", include("django_select2.urls")),
+    path('tinymce/', include('tinymce.urls')),
 ]
