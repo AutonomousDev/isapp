@@ -1,5 +1,5 @@
 # IS App
-Independant study tracking app
+independent study tracking app
 
 This web app is an independent study meeting tracking system. At the start of the 2021 school year California AB130 was passed changing the rules for independent study. The primary function of the app is to track weekly meetings with students to simplify complying with AB130. At the end of the week I have a summary of all meetings with each active student or students who missed meetings. Students with missing work or students who missed their meeting are highlighted in a different color on the week summary and the student detail view. 
 
